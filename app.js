@@ -77,6 +77,29 @@ app.route('/articles/:articleTitle')
           res.send(`Successfully updated the article!`);
         }
       });
+  })
+  .patch((req, res) => {
+    Article.updateOne(
+      { title: req.params.articleTitle },
+      { $set: req.body }, 
+      (err) => {
+        if(!err) {
+          res.send(`Updated the article successfully!`);
+        } else {
+          res.send(err);
+        }
+    });
+  })
+  .delete((req, res) => {
+    Article.deleteOne(
+      { title: req.params.articleTitle},
+      (err) => {
+        if(!err) {
+          res.send(`Deleted Successfully!`);
+        } else {
+          res.send(err);
+        }
+    });
   });
 
 
